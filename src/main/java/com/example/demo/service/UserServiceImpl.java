@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.User;
-import com.example.demo.entity.UserRole;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +13,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserRoleRepository userRoleRepository;
 
     @Override
     public List<User> getAllUsers() {
@@ -37,8 +32,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(User user) {
         user.setActive(1);
-        UserRole role = userRoleRepository.findUserRoleByRoleName("ROLE_USER");
-        user.setRole(role);
         return userRepository.save(user);
     }
 
